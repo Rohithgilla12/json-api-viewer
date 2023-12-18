@@ -9,7 +9,7 @@ export const jsonApiToJs = (
     const output = linkRelationships(jsonApi.data, jsonApi.included)
     const normalized = deattribute(output)
 
-    for (const key in Object.keys(normalized)) {
+    for (const key of Object.keys(normalized)) {
       if (!!normalized[key]?.data) {
         normalized[key] = normalized[key].data
       }
