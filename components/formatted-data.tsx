@@ -27,9 +27,6 @@ export const FormattedData = (props: FormattedDataProps) => {
       height="900px"
       width="100%"
       editorProps={{ $blockScrolling: true }}
-      onChange={(value) => {
-        console.log(value)
-      }}
       value={JSON.stringify(formattedData, null, 2)}
     />
   )
