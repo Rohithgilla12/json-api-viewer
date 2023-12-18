@@ -1,14 +1,13 @@
 "use client"
 
-import { JSX, SVGProps, useState } from "react"
+import { useState } from "react"
 
 import { jsonApiToJs } from "@/lib/jsonUtils"
 import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { Textarea } from "@/components/ui/textarea"
 
 import { FormattedData } from "./formatted-data"
+import { Icons } from "./icons"
 
 export function JsonViewer() {
   const [jsonValue, setJsonValue] = useState("")
@@ -41,70 +40,32 @@ export function JsonViewer() {
           <Textarea
             className="h-[800px] overflow-y-scroll"
             id="json-input"
+            value={jsonValue}
             placeholder="Paste your JSON here..."
             onChange={(e) => setJsonValue(e.target.value)}
           />
         </div>
+        <div className="flex flex-row gap-4">
+          <Button variant={"destructive"} onClick={() => setJsonValue("")}>
+            Clear
+          </Button>
+        </div>
       </aside>
+
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-bold">Formatted JSON</h2>
-        <FormattedData data={jsonValue} />
+        <FormattedData readonly data={jsonValue} />
         <div className="flex flex-row-reverse gap-4">
-          <Button onClick={downloadJson}>
-            <DownloadIcon className="mr-2 h-4 w-4" />
+          <Button variant={"outline"} onClick={downloadJson}>
+            <Icons.download className="mr-2 h-4 w-4" />
             Download JSON
           </Button>
-          <Button onClick={copyToClipboard}>
-            <ClipboardIcon className="mr-2 h-4 w-4" />
+          <Button variant={"secondary"} onClick={copyToClipboard}>
+            <Icons.clipboard className="mr-2 h-4 w-4" />
             Copy to Clipboard
           </Button>
         </div>
       </section>
     </main>
-  )
-}
-
-function DownloadIcon(
-  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
-) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <polyline points="7 10 12 15 17 10" />
-      <line x1="12" x2="12" y1="15" y2="3" />
-    </svg>
-  )
-}
-
-function ClipboardIcon(
-  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
-) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
-      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-    </svg>
   )
 }
