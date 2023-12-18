@@ -38,9 +38,8 @@ export function JsonViewer() {
       <aside className="flex flex-col gap-4">
         <h2 className="text-2xl font-bold">Input JSON</h2>
         <div className="grid w-full gap-1.5">
-          <Label htmlFor="json-input">JSON Input</Label>
           <Textarea
-            className="h-[400px] overflow-y-scroll"
+            className="h-[800px] overflow-y-scroll"
             id="json-input"
             placeholder="Paste your JSON here..."
             onChange={(e) => setJsonValue(e.target.value)}
@@ -49,15 +48,7 @@ export function JsonViewer() {
       </aside>
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-bold">Formatted JSON</h2>
-        <ScrollArea className="h-[400px] w-full max-w-full overflow-y-scroll rounded-md border">
-          <FormattedData data={jsonValue} />
-          <div className="p-4 text-sm">
-            <pre className="whitespace-pre-wrap" id="json-output" />
-          </div>
-          <div className="p-4 text-sm">
-            <pre className="whitespace-pre-wrap" id="json-output" />
-          </div>
-        </ScrollArea>
+        <FormattedData data={jsonValue} />
         <div className="flex gap-4">
           <Button onClick={downloadJson}>
             <DownloadIcon className="mr-2 h-4 w-4" />

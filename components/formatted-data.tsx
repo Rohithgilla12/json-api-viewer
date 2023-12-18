@@ -1,3 +1,8 @@
+import "ace-builds/src-noconflict/ace"
+import "ace-builds/src-noconflict/mode-json"
+import "ace-builds/src-noconflict/theme-cloud9_night"
+import AceEditor from "react-ace"
+
 import { jsonApiToJs } from "@/lib/jsonUtils"
 
 interface FormattedDataProps {
@@ -7,13 +12,17 @@ interface FormattedDataProps {
 export const FormattedData = (props: FormattedDataProps) => {
   const formattedData = jsonApiToJs(props.data)
 
-  const isArary = Array.isArray(formattedData)
-
   return (
-    <div className="p-4 text-sm">
-      <pre className="whitespace-pre-wrap" id="json-output">
-        {JSON.stringify(formattedData, null, 2)}
-      </pre>
-    </div>
+    <AceEditor
+      className="overflow-y-scroll rounded-md border"
+      readOnly
+      mode="json"
+      name="json-formatted"
+      theme="cloud9_night"
+      wrapEnabled
+      height="100%"
+      width="100%"
+      value={JSON.stringify(formattedData, null, 2)}
+    />
   )
 }
