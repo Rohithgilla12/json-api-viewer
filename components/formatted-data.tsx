@@ -24,7 +24,7 @@ export const FormattedData = (props: FormattedDataProps) => {
       name="json-formatted"
       theme={theme === "dark" ? "cloud9_night" : "cloud9_day"}
       wrapEnabled
-      height="800px"
+      height="900px"
       width="100%"
       editorProps={{ $blockScrolling: true }}
       onChange={(value) => {

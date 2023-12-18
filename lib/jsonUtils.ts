@@ -19,7 +19,24 @@ export const jsonApiToJs = (
 
     return normalized
   } catch (e) {
-    console.log(e)
     return {}
   }
+}
+
+export const downloadJson = (data: any) => {
+  const blob = new Blob([JSON.stringify(data, null, 2)], {
+    type: "application/json",
+  })
+
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement("a")
+  a.href = url
+  a.download = "data.json"
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
+export const copyToClipboard = async (data: any) => {
+  const formatted = JSON.stringify(data, null, 2)
+  await navigator.clipboard.writeText(formatted)
 }
