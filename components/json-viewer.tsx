@@ -49,7 +49,7 @@ export function JsonViewer() {
       <section className="flex flex-col gap-4">
         <h2 className="text-2xl font-bold">Formatted JSON</h2>
         <FormattedData data={jsonValue} />
-        <div className="flex gap-4">
+        <div className="flex flex-row-reverse gap-4">
           <Button onClick={downloadJson}>
             <DownloadIcon className="mr-2 h-4 w-4" />
             Download JSON

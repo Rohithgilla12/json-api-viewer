@@ -20,7 +20,7 @@ export const FormattedData = (props: FormattedDataProps) => {
       name="json-formatted"
       theme="cloud9_night"
       wrapEnabled
-      height="100%"
+      height="800px"
       width="100%"
       value={JSON.stringify(formattedData, null, 2)}
     />
