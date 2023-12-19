@@ -1,9 +1,9 @@
 import "ace-builds/src-noconflict/ace"
 import "ace-builds/src-noconflict/mode-json"
-import "ace-builds/src-noconflict/theme-cloud9_night"
 import "ace-builds/src-noconflict/theme-cloud9_day"
+import "ace-builds/src-noconflict/theme-cloud9_night"
 import { useTheme } from "next-themes"
-import AceEditor, { IAceEditorProps } from "react-ace"
+import AceEditor from "react-ace"
 
 import { jsonApiToJs } from "@/lib/jsonUtils"
 
