@@ -1,24 +1,34 @@
 import { deattribute, deserialise, linkRelationships } from "kitsu-core"
 
+const normalizeResponse = (data?: object) => {
+  if (!data) return null
+  // when data does not have "include", "deserialise" does not work.
+  const newData = Object.prototype.hasOwnProperty.call(data, "included")
+    ? data
+    : { ...data, included: [] }
+  return deserialise(newData)
+}
+
 export const jsonApiToJs = (
   input: any
 ): Record<string, any> | Record<string, any>[] => {
   try {
     const jsonApi = JSON.parse(input)
 
-    const output = linkRelationships(jsonApi.data, jsonApi.included)
-    const normalized = deattribute(output)
+    const data = normalizeResponse(jsonApi)
 
-    for (const key of Object.keys(normalized)) {
-      if (!!normalized[key]?.data) {
-        normalized[key] = normalized[key].data
+    for (const key of Object.keys(data)) {
+      // Check for array
+      if (!!data[key]?.data) {
+        data[key] = data[key].data
       }
     }
 
-    normalized.meta = jsonApi.meta
+    data.meta = jsonApi.meta
 
-    return normalized
+    return data
   } catch (e) {
+    console.error(e)
     return {}
   }
 }
