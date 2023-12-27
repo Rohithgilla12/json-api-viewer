@@ -17,12 +17,18 @@ export const jsonApiToJs = (
 
     const data = normalizeResponse(jsonApi)
 
-    for (const key of Object.keys(data)) {
-      // Check for array
-      if (!!data[key]?.data) {
-        data[key] = data[key].data
+    const handleNestedArrays = (obj: any) => {
+      for (const key of Object.keys(obj)) {
+        if (!!obj[key]?.data) {
+          obj[key] = obj[key].data
+        }
+        if (typeof obj[key] === "object" && obj[key] !== null) {
+          handleNestedArrays(obj[key])
+        }
       }
     }
+
+    handleNestedArrays(data)
 
     data.meta = jsonApi.meta
 
