@@ -37,7 +37,6 @@ export function JsonViewer() {
             }}
           />
         </div>
-        Ø
         <div className="flex flex-row gap-4">
           <Button variant={"destructive"} onClick={() => setJsonValue("")}>
             Clear
